@@ -1,3 +1,4 @@
+// poj3295 重言式 Tautology
 #include <algorithm>
 #include <stdio.h>
 #include <string.h>
