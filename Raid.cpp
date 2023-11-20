@@ -58,7 +58,7 @@
 //     return 0;
 // }
 
-// // 2496K 782MS
+// // 2496K 766MS
 
 // // 对点集先按 x xx 排序，再按 y yy 排序。假设有一个求解区间内最小点间距离的函数，对于某个区间，处理完左区间与右区间的点对后，只用对左区间右边界与右区间左边界，可能出现答案的点对计算距离。
 
@@ -92,15 +92,15 @@ double solve(int l, int r)
 {
     if (r - l <= 1)
         return inf;
-    int m = (l + r) >> 1, limit = ps[m - 1].x;
+    int m = (l + r) >> 1, limitx = ps[m - 1].x;
     double res = min(solve(l, m), solve(m, r));
     for (int i = m - 1; i >= l; i--)
     {
-        if (limit - ps[i].x >= res)
+        if (limitx - ps[i].x >= res)
             break;
         for (int j = m; j < r; j++)
         {
-            if (ps[j].x - ps[i].x >= res)
+            if (ps[j].x - ps[i].x >= res || ps[j].y - ps[i].y >= res)
                 break;
             if (ps[j].id != ps[i].id)
                 res = min(res, dist(i, j));
@@ -111,24 +111,24 @@ double solve(int l, int r)
 
 int main()
 {
-    int t, n, sz;
-    scanf("%d", &t);
-    while (t--)
+    int i, n, size;
+    scanf("%d", &i);
+    while (i--)
     {
         scanf("%d", &n);
-        sz = n << 1;
-        for (int i = 0; i < n; i++)
+        size = n << 1;
+        for (int k = 0; k < n; k++)
         {
-            scanf("%d%d", &ps[i].x, &ps[i].y);
-            ps[i].id = 0;
+            scanf("%d%d", &ps[k].x, &ps[k].y);
+            ps[k].id = 0;
         }
-        for (int i = n; i < sz; i++)
+        for (int k = n; k < size; k++)
         {
-            scanf("%d%d", &ps[i].x, &ps[i].y);
-            ps[i].id = 1;
+            scanf("%d%d", &ps[k].x, &ps[k].y);
+            ps[k].id = 1;
         }
-        sort(ps, ps + sz);
-        printf("%.3f\n", solve(0, sz));
+        sort(ps, ps + size);
+        printf("%.3f\n", solve(0, size));
     }
     return 0;
 }
@@ -150,7 +150,7 @@ int main()
 //     {
 //         return x < a.x || (x == a.x && y < a.y);
 //     }
-// } ps[maxn << 1], tmp[maxn << 1];
+// } map[maxn << 1], tmp[maxn << 1];
 
 // double distance(Point a, Point b)
 // {
@@ -165,22 +165,22 @@ int main()
 //         return inf;
 //     }
 //     int m = (l + r) >> 1;
-//     double midX = ps[m].x;
+//     double midX = map[m].x;
 //     double d = min(closestPair(l, m), closestPair(m, r));
 
-//     merge(ps + l, ps + m, ps + m, ps + r, tmp);
-//     copy(tmp, tmp + r - l, ps + l);
+//     merge(map + l, map + m, map + m, map + r, tmp);
+//     copy(tmp, tmp + r - l, map + l);
 
 //     int k = 0;
 //     for (int i = l; i < r; i++)
 //     {
-//         if (fabs(midX - ps[i].x) < d)
+//         if (fabs(midX - map[i].x) < d)
 //         {
-//             for (int j = k - 1; j >= 0 && ps[i].y - tmp[j].y < d; j--)
+//             for (int j = k - 1; j >= 0 && map[i].y - tmp[j].y < d; j--)
 //             {
-//                 d = min(d, distance(ps[i], tmp[j]));
+//                 d = min(d, distance(map[i], tmp[j]));
 //             }
-//             tmp[k++] = ps[i];
+//             tmp[k++] = map[i];
 //         }
 //     }
 //     return d;
@@ -188,19 +188,19 @@ int main()
 
 // int main()
 // {
-//     int t, n, sz, x, y;
+//     int t, n, size, x, y;
 //     scanf("%d", &t);
 //     while (t--)
 //     {
 //         scanf("%d", &n);
-//         sz = n << 1;
-//         for (int i = 0; i < sz; i++)
+//         size = n << 1;
+//         for (int i = 0; i < size; i++)
 //         {
 //             scanf("%d%d", &x, &y);
-//             ps[i].x = x, ps[i].y = y, ps[i].id = i < n ? 0 : 1;
+//             map[i].x = x, map[i].y = y, map[i].id = i < n ? 0 : 1;
 //         }
-//         sort(ps, ps + sz);
-//         printf("%.3f\n", closestPair(0, sz));
+//         sort(map, map + size);
+//         printf("%.3f\n", closestPair(0, size));
 //     }
 //     return 0;
 // }
