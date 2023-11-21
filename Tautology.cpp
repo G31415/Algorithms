@@ -1,4 +1,5 @@
-// poj3295 重言式 Tautology
+// poj3295  Tautology
+// 128K 0MS
 #include <algorithm>
 #include <stdio.h>
 #include <string.h>
