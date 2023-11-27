@@ -8,35 +8,26 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
+#define Max 0x2710 // 十六进制减少运行时间
 using namespace std;
-#define Max 10000
 
 int N;
-int n;
 int x[Max];
 int y[Max];
-int disx;
-int disy;
 int dis;
 
 int main()
 {
     scanf("%d", &N);
-    n = N >> 1;
     for (int i = 0; i < N; i++)
-        scanf("%d %d", &x[i], &y[i]);
-    sort(y, y + N);
-    disy = y[n];
+        scanf("%d%d", &x[i], &y[i]);
     sort(x, x + N);
     for (int i = 0; i < N; i++)
         x[i] -= i;
     sort(x, x + N);
-    disx = x[n];
+    sort(y, y + N);
     for (int i = 0; i < N; i++)
-    {
-        dis += abs(disx - x[i]);
-        dis += abs(disy - y[i]);
-    }
-    printf("%d", dis);
+        dis += abs(x[N >> 1] - x[i]) + abs(y[N >> 1] - y[i]);
+    printf("%d\n", dis);
     return 0;
 }
