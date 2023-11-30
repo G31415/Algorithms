@@ -1,4 +1,5 @@
 // poj2503 Babelfish
+
 // 3264K  218ms
 #include <iostream>
 #include <cstdio>

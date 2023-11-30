@@ -1,4 +1,5 @@
 // poj3233 Matrix Power Series
+
 //  164K	157MS
 #include <cstdio>
 #include <iostream>

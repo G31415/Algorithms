@@ -1,5 +1,5 @@
 // poj1723 SOLDIERS
-// 212K	16MS
+// 212K	0MS
 
 // cost=∑|y[i]−k| 货仓选址问题，k取y[i]的中位数就可以了
 // cost=∑|x[i]−(k+i)|=∑|(x[i]−i)−k| x-i也是与y相同的问题

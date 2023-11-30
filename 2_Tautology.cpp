@@ -1,4 +1,5 @@
 // poj3295  Tautology
+
 // 128K 0MS
 #include <algorithm>
 #include <stdio.h>

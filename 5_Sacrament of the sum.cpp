@@ -1,4 +1,5 @@
 // poj2366 Sacrament of the sum
+
 // 376K 63MS
 #include <algorithm>
 #include <iostream>
