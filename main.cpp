@@ -1,30 +1,86 @@
-#include"algorithms.h"
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <algorithm>
+#include <string>
+#include <cstdlib>
+#include <queue>
+#include <set>
+#include <vector>
+#define INF 0x3f3f3f3f
+#define N 10000
+using namespace std;
+int dx[4] = {0, 1, 0, -1};
+int dy[4] = {1, 0, -1, 0};
+struct Node
+{
+    int x;
+    int y;
+} a[N];
+int x[N], y[N];
+int minn, plan;
+int main()
+{
 
-int main(){
-    int *a;
-    int size = 0;
-    int num;
-    printf("输入数字:\n");
-    a = (int *)malloc(sizeof(int));
-    while (1) {
-        scanf("%d", &num);
-        if (num == -1)  break;
-        a = (int *)realloc(a, (size + 1) * sizeof(int));
-        a[size] = num;
-        size++;
+    int n;
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++)
+    {
+        scanf("%d%d", &a[i].x, &a[i].y);
+        x[i] = a[i].x;
+        y[i] = a[i].y;
     }
-    int*a1;
-    a1 = (int *)malloc(size*sizeof(int));
-    for(int i=0;i<size;i++) {a1[i]=a[i];printf("%d ",a1[i]);}
-    printf("\n");
-    quick_sort(a1,0,size-1);
-    for (int i = 0; i < size; i++) printf("%d ", a1[i]); printf("\n");
-    // int* max;
-    // max=the_max_subarray(a,size);
-    // printf("\n%d %d %d ",max[0],max[1],max[2]);
-    // max=the_max_subarray(a1,size);
-    // printf("\n%d %d %d ",max[0],max[1],max[2]);
-    free(a);free(a1);
-    getchar();getchar();
+
+    sort(x + 1, x + n + 1); // 对x排序
+    sort(y + 1, y + n + 1); // 对y排序
+
+    if (n % 2) // n为奇数时
+    {
+        int temp = (n / 2) + 1;
+        for (int i = 1; i <= n; i++)
+        {
+            if (a[i].x == x[temp] && a[i].y == y[temp]) // 若点为给出点
+            {
+                int Min = INF;
+                for (int l = 0; l < 4; l++) // 枚举四个方向
+                {
+                    int xx = x[temp] + dx[l];
+                    int yy = y[temp] + dy[l];
+                    int sum = 0;
+                    for (i = 1; i <= n; i++) // 求最小的距离
+                        sum += abs(a[i].x - xx) + abs(a[i].y - yy);
+                    if (sum < Min)
+                    {
+                        Min = sum;
+                        plan = 1;
+                    }
+                    else if (sum == Min)
+                        plan++;
+                }
+                printf("%d %d\n", Min, plan);
+                return 0;
+            }
+            else // 若点不为给出点
+            {
+                minn += abs(a[i].x - x[temp]) + abs(a[i].y - y[temp]); // 记录最小距离
+                plan = 1;                                              // 方案数为1
+            }
+        }
+        printf("%d %d\n", minn, plan);
+    }
+    else // n为偶数时
+    {
+        int temp1 = n / 2, temp2 = n / 2 + 1;
+        plan = (x[temp2] - x[temp1] + 1) * (y[temp2] - y[temp1] + 1); // 令方案数等于点的个数
+        for (int i = 1; i <= n; i++)
+        {
+            minn += abs(a[i].x - x[temp1]) + abs(a[i].y - y[temp1]); // 记录最小距离
+            int x0 = a[i].x, y0 = a[i].y;
+            if (x[temp1] <= x0 && x0 <= x[temp2] && y[temp1] <= y0 && y0 <= y[temp2]) // 更新方案数
+                plan--;
+        }
+        printf("%d %d\n", minn, plan);
+    }
     return 0;
 }
