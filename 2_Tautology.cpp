@@ -1,14 +1,23 @@
 // poj3295  Tautology
 
+// 大意: 判断前缀运算式是否永真
+
+// 可以分析出式子是前缀表达式，可以看作是中序排列的运算树
+// 从后往前依次入栈，遇到运算符先出栈计算，再进栈
+
 // 128K 0MS
 #include <algorithm>
 #include <stdio.h>
 #include <string.h>
+
 #define N 110
+
 char a[N]; // 字符串数组
 int S[N];  // 数字栈
 int p, q, r, s, t;
-void gzz() // 从后往前进行运算，把数字进栈，遇到运算符就出栈运算后在进栈
+
+// 从后往前进行运算，把数字进栈，遇到运算符就出栈运算后在进栈
+void gzz() 
 {
     int k = 0, t1, t2;
     int l = strlen(a);
@@ -61,7 +70,9 @@ void gzz() // 从后往前进行运算，把数字进栈，遇到运算符就出
         }
     }
 }
-bool change(int i) // 赋值后运算
+
+// 赋值后运算
+bool change(int i) 
 {
     int binary[5] = {0}; // 用于存储二进制形式的每一位
     int index = 4;       // 从最低位开始填充
@@ -81,6 +92,7 @@ bool change(int i) // 赋值后运算
     gzz();
     return S[0];
 }
+
 bool solve_all(char *a)
 {
     for (int i = 0; i < 32; i++)
@@ -90,6 +102,7 @@ bool solve_all(char *a)
     }
     return 1;
 }
+
 int main()
 {
     while (gets(a) && a[0] != '0')
@@ -101,98 +114,6 @@ int main()
     }
     return 0;
 }
-
-/* ------------------------------------------------------------------------------------------------------ */
-
-// 与上面差不多，用栈的方法，采用5套循环枚举
-
-// #include <algorithm>
-// #include <stdio.h>
-// #include <string.h>
-// #define N 110
-// char a[N];
-// int S[N];
-// int p, q, r, s, t;
-// void fore()
-// {
-//     int k = 0, t1, t2;
-//     int l = strlen(a);
-//     for (int i = l - 1; i >= 0; i--)
-//     {
-//         if (a[i] == 'p')
-//             S[k++] = p;
-//         else if (a[i] == 'q')
-//             S[k++] = q;
-//         else if (a[i] == 'r')
-//             S[k++] = r;
-//         else if (a[i] == 's')
-//             S[k++] = s;
-//         else if (a[i] == 't')
-//             S[k++] = t;
-//         else if (a[i] == 'K')
-//         {
-//             t1 = S[--k];
-//             t2 = S[--k];
-//             S[k++] = (t1 && t2);
-//         }
-//         else if (a[i] == 'A')
-//         {
-//             t1 = S[--k];
-//             t2 = S[--k];
-//             S[k++] = (t1 || t2);
-//         }
-//         else if (a[i] == 'N')
-//         {
-//             t1 = S[--k];
-//             S[k++] = (!t1);
-//         }
-//         else if (a[i] == 'C')
-//         {
-//             t1 = S[--k];
-//             t2 = S[--k];
-//             if (t1 == 1 && t2 == 0)
-//                 S[k++] = 0;
-//             else
-//                 S[k++] = 1;
-//         }
-//         else if (a[i] == 'E')
-//         {
-//             t1 = S[--k];
-//             t2 = S[--k];
-//             if (t1 == t2)
-//                 S[k++] = 1;
-//             else
-//                 S[k++] = 0;
-//         }
-//     }
-// }
-// bool slove()
-// {
-//     for (p = 0; p <= 1; p++)
-//         for (q = 0; q <= 1; q++)
-//             for (r = 0; r <= 1; r++)
-//                 for (s = 0; s <= 1; s++)
-//                     for (t = 0; t <= 1; t++)
-//                     {
-//                         fore();
-//                         if (!S[0])
-//                             return 0;
-//                     }
-//     return 1;
-// }
-// int main()
-// {
-//     while (gets(a) && a[0] != '0')
-//     {
-//         if (slove())
-//             printf("tautology\n");
-//         else
-//             printf("not\n");
-//     }
-//     return 0;
-// }
-
-/* ------------------------------------------------------------------------------------------------------ */
 
 // 采用递归的方式计算运算符里的算式
 // 超时
