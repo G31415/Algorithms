@@ -10,8 +10,7 @@
 
 //  判断炮兵部队不在山上：只要state[i] & mp[r] == 0,就表示state[i] 可以放在r这行上，而且炮不会在山上，炮之间也不会攻击；
 
-//  判断 i行，i -1行，i - 2行的炮没有冲突：7现在i行，i - 1行，i - 2行的炮的摆放情况分别是state [i],state[j], state[k]；
-
+//  判断 i行，i -1行，i - 2行的炮没有冲突：假设现在i行，i - 1行，i - 2行的炮的摆放情况分别是state [i],state[j], state[k]；
 // 当满足 state[i] & state[j] == 0 state[i] & state[k] == 0 state[j] & state[k] == 0 条件时，
 // 三行的部署情况没有冲突；
 
@@ -26,9 +25,9 @@
 using namespace std;
 
 int n, m;
-int mp[MAXN];//记录地形
+int mp[MAXN]; // 记录地形
 
-struct State//记录状态
+struct State // 记录状态
 {
     int sta; // 表示第i个状态是怎么样的
     int cnt; // 记录这个状态下，部署了多少炮兵部队
@@ -41,7 +40,7 @@ int main()
     scanf("%d%d", &n, &m);
 
     // 二进制记录地图
-    for (int i = 1; i <= n; i++)//将每一行转化为一串二进制
+    for (int i = 1; i <= n; i++) // 将每一行转化为一串二进制
     {
         mp[i] = 0;
         char input[12];
@@ -49,7 +48,7 @@ int main()
         for (int j = 1; j <= m; j++)
         {
             int temp = ((input[j] == 'H') ? 1 : 0);
-            mp[i] |= temp;//或运算转化最后一位
+            mp[i] |= temp; // 或运算转化最后一位
             if (j != m)
                 mp[i] = mp[i] << 1;
         }
@@ -59,17 +58,17 @@ int main()
     int state_num = 0;
     for (int i = 0; i <= (1 << m) - 1; i++)
     {
-        if ((i & (i << 1)) == 0 && (i & (i << 2)) == 0)//不能再两次移动中有1相遇
+        if ((i & (i << 1)) == 0 && (i & (i << 2)) == 0) // 不能再两次移动中有1相遇
         {
             state_num++;
             state[state_num].sta = i;
-            //计算有几个炮台
+            // 计算有几个炮台
             state[state_num].cnt = 0;
             for (int tmp = i; tmp; tmp = (tmp >> 1))
                 if (tmp & 1)
                     state[state_num].cnt++;
         }
-    } 
+    }
 
     // 状态转移过程 - start
     memset(dp, 0, sizeof(dp));
@@ -78,7 +77,7 @@ int main()
     for (int i = 1; i <= state_num; i++)
     {
         if (state[i].sta & mp[1])
-            continue;//冲突则跳过
+            continue; // 冲突则跳过
         dp[1][i][1] = state[i].cnt;
     }
 
@@ -93,7 +92,7 @@ int main()
                 continue;
             dp[2][i][j] = max(dp[2][i][j], dp[1][j][1] + state[i].cnt);
         }
-    } 
+    }
 
     // 对剩余的进行状态枚举(一行一行枚举，类似动态规划，r行的状态不能与r-1和r-2行冲突)
     for (int r = 3; r <= n; r++)
@@ -126,7 +125,7 @@ int main()
         for (int j = 1; j <= state_num; j++)
         {
             ans = max(ans, dp[n][i][j]);
-            //n行后的所有情况中的最大值
+            // n行后的所有情况中的最大值
         }
     }
     printf("%d\n", ans);

@@ -1,7 +1,12 @@
 // poj3714 Raid
 
+// 大意: 图中有相同数量的两种点，求距离最短的一对点(即限制必须是两种点)
+
+// 对点集按 x 排序，用x轴二分点集，分别求左右和跨轴的点对的最短距离。
+// r - l <= 1 条带太窄，没有有效对，返回无穷大(作为递归的结束的边界值)
+// 求跨轴的最短距离可以对x轴和y轴进行限制以减少计算量
+
 // 2496K 719MS
-// 对点集先按 x xx 排序，再按 y yy 排序。假设有一个求解区间内最小点间距离的函数，对于某个区间，处理完左区间与右区间的点对后，只用对左区间右边界与右区间左边界，可能出现答案的点对计算距离。
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -10,7 +15,7 @@
 using namespace std;
 
 #define inf 0x3f3f3f3f // 无穷大
-#define maxn 100000    // 点集最大值
+#define Max 100000    // 点集最大值
 
 struct p
 {
@@ -24,7 +29,7 @@ struct p
             return x < a.x;
         return y < a.y;
     }
-} ps[maxn << 1];
+} ps[Max << 1];
 
 double dist(int i, int j) // i和j点间的距离
 {
@@ -36,16 +41,16 @@ double solve(int l, int r) // 分治算法
 {
     if (r - l <= 1) // 条带太窄，没有有效对，返回无穷大
         return inf;
-    int m = (l + r) >> 1;
+    int m = (l + r) >> 1; // 分界线
     int limitx = ps[m - 1].x;
-    double res = min(solve(l, m), solve(m, r));
+    double res = min(solve(l, m), solve(m, r)); // 递归求左右
     for (int i = m - 1; i >= l; i--)
     {
         if (limitx - ps[i].x >= res)
             break;
         for (int j = m; j < r; j++)
         {
-            if (ps[j].x - ps[i].x >= res || abs(ps[j].y - ps[i].y) >= res)
+            if (ps[j].x - ps[i].x >= res || (ps[j].y - ps[i].y) >= res) // 对x轴和y轴限制
                 break;
             if (ps[j].z != ps[i].z)
                 res = min(res, dist(i, j));
@@ -65,7 +70,7 @@ int main()
         for (int k = 0; k < size; k++)
         {
             scanf("%d%d", &ps[k].x, &ps[k].y);
-            ps[k].z = k < n ? 0 : 1;
+            ps[k].z = k < n ? 0 : 1; // 对点标记
         }
         sort(ps, ps + size);
         printf("%.3f\n", solve(0, size));

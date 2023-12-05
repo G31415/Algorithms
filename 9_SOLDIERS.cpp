@@ -1,9 +1,11 @@
 // poj1723 SOLDIERS
-// 212K	0MS
+
+// 大意: 将图中的点排成一排的最小移动距离
 
 // cost=∑|y[i]−k| 货仓选址问题，k取y[i]的中位数就可以了
 // cost=∑|x[i]−(k+i)|=∑|(x[i]−i)−k| x-i也是与y相同的问题
 
+// 212K	0MS
 #include <cstdio>
 #include <cmath>
 #include <iostream>
