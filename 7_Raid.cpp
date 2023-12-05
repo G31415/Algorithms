@@ -36,7 +36,8 @@ double solve(int l, int r) // 分治算法
 {
     if (r - l <= 1) // 条带太窄，没有有效对，返回无穷大
         return inf;
-    int m = (l + r) >> 1, limitx = ps[m - 1].x;
+    int m = (l + r) >> 1;
+    int limitx = ps[m - 1].x;
     double res = min(solve(l, m), solve(m, r));
     for (int i = m - 1; i >= l; i--)
     {
@@ -44,7 +45,7 @@ double solve(int l, int r) // 分治算法
             break;
         for (int j = m; j < r; j++)
         {
-            if (ps[j].x - ps[i].x >= res || ps[j].y - ps[i].y >= res)
+            if (ps[j].x - ps[i].x >= res || abs(ps[j].y - ps[i].y) >= res)
                 break;
             if (ps[j].z != ps[i].z)
                 res = min(res, dist(i, j));
