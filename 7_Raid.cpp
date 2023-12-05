@@ -15,7 +15,7 @@
 using namespace std;
 
 #define inf 0x3f3f3f3f // 无穷大
-#define Max 100000    // 点集最大值
+#define Max 0x186a0    // 点集最大值
 
 struct p
 {
