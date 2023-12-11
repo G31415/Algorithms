@@ -1,1 +1,1 @@
-// POJ3040 Allowance
+// poj3040 Allowance
