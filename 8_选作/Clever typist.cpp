@@ -1,6 +1,5 @@
 // poj1184 聪明的打字员
 
-
 // 6064K	16MS
 #include <iostream>
 #include <algorithm>
