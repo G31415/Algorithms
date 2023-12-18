@@ -14,7 +14,7 @@
 #include <string.h>
 #include <vector>
 
-    using namespace std;
+using namespace std;
 
 #define maxn 500
 #define Clear(a, b) memset(a, b, sizeof(a))
