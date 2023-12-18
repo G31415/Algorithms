@@ -7,7 +7,7 @@
 // 答案就是f[max][max];
 // f[i][j] = f[i][j] || f[i - wx[i]][i - wy[i]];
 
-// Accepted 588K 79MS
+// 588K 79MS
 #include <stdio.h>
 #include <string.h>
 #include <vector>
