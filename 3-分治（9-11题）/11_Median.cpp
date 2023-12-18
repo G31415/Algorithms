@@ -38,6 +38,7 @@ bool check(int x)
     else
         return cnt <= (n * (n - 1)) >> 2;
 }
+
 int main()
 {
     while (scanf("%d", &n) != EOF)
