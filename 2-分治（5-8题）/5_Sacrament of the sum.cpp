@@ -1,5 +1,9 @@
 // poj2366 Sacrament of the sum
 
+// 在两个数组里面分别找一个数，使得和为10000
+
+//
+
 // 376K 63MS
 #include <algorithm>
 #include <iostream>
