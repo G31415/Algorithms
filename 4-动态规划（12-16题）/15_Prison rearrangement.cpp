@@ -1,18 +1,20 @@
 // poj1636 Prison rearrangement
 
+// 大意：两个监狱交换等数量的犯人（不超过一半），有的犯人不能在一个监狱，求最大交换人数
+
 // 有的犯人如果要换的话需要一次性调换好几个，才能使他们不冲突。
 // 这样想的话。就是求连通分量，每个连通分量就是一种调换，
 // 就是说，这个连通分量中有第一个监狱X人，第二个监狱Y人，我们要做的就是交换X，Y。
 // f[i][j] 表示从第二个监狱向第一个监狱调换了j人，从第二个监狱向第一个监狱调换了i人这个状态是否能到达。
 // 答案就是f[max][max];
-// f[i][j] = f[i][j] || f[i - wx[i]][i - wy[i]];
+// f[i][j] = f[i][j] || f[i-wx[i]][i-wy[i]];
 
 // 588K 79MS
 #include <stdio.h>
 #include <string.h>
 #include <vector>
 
-using namespace std;
+    using namespace std;
 
 #define maxn 500
 #define Clear(a, b) memset(a, b, sizeof(a))
