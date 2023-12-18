@@ -16,7 +16,9 @@
 #include <cstring>
 #include <algorithm>
 #include <queue>
+
 using namespace std;
+
 const int maxr = 21;
 const int maxc = 21;
 int vis[maxr][maxc][1 << 14]; // vis第三维的高位二进制表示紧接着蛇头的那格在蛇头的相对方向
@@ -52,6 +54,7 @@ bool check(int x, int y, Node node) // 判断x,y坐标是否处于node状态的�
     }
     return false; // 表示无冲突
 }
+
 queue<Node> Q;
 
 int BFS(Node nod)
@@ -84,6 +87,7 @@ int BFS(Node nod)
     }
     return -1;
 }
+
 int main()
 {
     while (scanf("%d%d%d", &R, &C, &L) == 3)
@@ -128,24 +132,30 @@ int main()
 #include <iostream>
 #include <cstring>
 #include <cstdio>
+
 using namespace std;
+
 const int MAX = 22;
 const int MAXN = 1000000;
 const int MAXLEN = 1 << 14 + 1;
+
 struct Snake
 {
     int x, y;
 } snake[10];
+
 struct State
 {
     Snake h; // 头部坐标
     unsigned hash;
     int step;
 } s[MAXN];
+
 int row, col, len;
 bool map[MAX][MAX];       // 是否存在障碍
 bool v[MAX][MAX][MAXLEN]; // 状态记录
 int mov[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
 int get_next_hash(int hash, Snake pre, Snake next)
 {
     const int INF = (1 << ((len - 1) << 1)) - 1;
@@ -228,6 +238,7 @@ void init_snake()
         s[0].hash = get_next_hash(s[0].hash, snake[i], snake[i - 1]);
     v[s[0].h.x][s[0].h.y][s[0].hash] = true;
 }
+
 int main()
 {
     int counter = 0;

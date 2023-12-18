@@ -14,13 +14,13 @@ using namespace std;
 
 int a[Max][Max];
 int b[Max][Max]; // b[j][k]表示从i行加到j行 第k列值的大小，将二维转为一维
-int dp[Max]; //存储每一个数组的最大子数列
+int dp[Max];     // 存储每一个数组的最大子数列
 int ans, n;
 
 void solve(int j)
 {
-    memset(dp, 0, sizeof(dp));//重置dp数组
-    for (int i = 1; i <= n; i++)//从i开始，动态规划
+    memset(dp, 0, sizeof(dp));   // 重置dp数组
+    for (int i = 1; i <= n; i++) // 从i开始，动态规划
     {
         dp[i] = max(b[j][i], b[j][i] + dp[i - 1]);
         ans = max(ans, dp[i]);
@@ -29,7 +29,7 @@ void solve(int j)
 
 int main()
 {
-    scanf("%d",&n);
+    scanf("%d", &n);
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= n; j++)
@@ -50,7 +50,7 @@ int main()
             solve(j);
         }
     }
-    printf("%d",ans);
+    printf("%d", ans);
 
     return 0;
 }

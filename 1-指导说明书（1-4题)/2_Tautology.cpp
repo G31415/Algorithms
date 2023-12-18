@@ -17,7 +17,7 @@ int S[N];  // 数字栈
 int p, q, r, s, t;
 
 // 从后往前进行运算，把数字进栈，遇到运算符就出栈运算后在进栈
-void gzz() 
+void gzz()
 {
     int k = 0, t1, t2;
     int l = strlen(a);
@@ -72,7 +72,7 @@ void gzz()
 }
 
 // 赋值后运算
-bool change(int i) 
+bool change(int i)
 {
     int binary[5] = {0}; // 用于存储二进制形式的每一位
     int index = 4;       // 从最低位开始填充

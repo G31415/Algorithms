@@ -17,7 +17,8 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
-    using namespace std;
+
+using namespace std;
 
 int n;    // 货币种数
 int m;    // 兑换点数量
@@ -49,16 +50,15 @@ bool bellman(void)
         flag = false;
         for (int j = 0; j < all; j++)
             if (dis[exc[j].b] < (dis[exc[j].a] - exc[j].c) * exc[j].r) // 寻找最长路径
-            {                                                          // 进行比较的是"某点到自身的权值"和"某点到另一点的权值"
+            {
+                // 进行比较的是"某点到自身的权值"和"某点到另一点的权值"
                 dis[exc[j].b] = (dis[exc[j].a] - exc[j].c) * exc[j].r;
                 flag = true;
             }
         if (!flag)
             break;
     }
-
     /*Search Positive Circle*/
-
     for (int k = 0; k < all; k++)
         if (dis[exc[k].b] < (dis[exc[k].a] - exc[k].c) * exc[k].r) // 正环能够无限松弛
             return true;

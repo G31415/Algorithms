@@ -43,7 +43,7 @@ void addToHash(const char *eng_word, const char *forn_word, int &n)
 {
     int key = ELFhash(forn_word);
     Next[n] = Hash[key]; // 如果key重复，将上一个n加入Next作为上一个值的索引
-    Hash[key] = n;        // 记录forn_word所对应的字典排序
+    Hash[key] = n;       // 记录forn_word所对应的字典排序
     strncpy(dict[n].eng_word, eng_word, sizeof(dict[n].eng_word));
     strncpy(dict[n].forn_word, forn_word, sizeof(dict[n].forn_word));
     n++;

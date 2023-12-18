@@ -21,38 +21,40 @@
 #include <climits>
 #define Max 0x19
 
-    using namespace std;
+using namespace std;
 
 int n;
 int h;
-int fi[Max]; // fi[]期望钓鱼数
-int di[Max]; // di[]每五分钟减少鱼数
-int ti[Max]; // ti[]位移时间
-int time[Max];             // 在当前湖停下来时在每个湖停留的时间
-int best[Max];             // 最优解对应的在每个湖停留的时间
-int bestFishNum;         // 最优解钓鱼总数
-int fishNum;             // 当前钓鱼总数
+int fi[Max];     // fi[]期望钓鱼数
+int di[Max];     // di[]每五分钟减少鱼数
+int ti[Max];     // ti[]位移时间
+int time[Max];   // 在当前湖停下来时在每个湖停留的时间
+int best[Max];   // 最优解对应的在每个湖停留的时间
+int bestFishNum; // 最优解钓鱼总数
+int fishNum;     // 当前钓鱼总数
 
-int main(){
-    while(scanf("%d",&n)!=EOF&&n){
+int main()
+{
+    while (scanf("%d", &n) != EOF && n)
+    {
         scanf("%d", &h);
         h *= 12; // 共有h个5分钟
-        for(int i=0;i<n;i++) 
+        for (int i = 0; i < n; i++)
             scanf("%d", &fi[i]);
         for (int i = 0; i < n; i++)
             scanf("%d", &di[i]);
-        for (int i = 0; i < n-1; i++)
+        for (int i = 0; i < n - 1; i++)
             scanf("%d", &ti[i]);
 
         bestFishNum = INT_MIN;
         memset(best, 0, sizeof best); // 将best数组的值全部设为0
 
-        for (int p = 0; p < n; p++)   // 穷举最终停下的湖的位置
-        { 
+        for (int p = 0; p < n; p++) // 穷举最终停下的湖的位置
+        {
             memset(time, 0, sizeof(time));
             fishNum = 0;
-            int remainingTime = h; // 当前剩余时间
-            int remainingFish[Max];  // 当前在每个湖剩余能钓的鱼的数目
+            int remainingTime = h;  // 当前剩余时间
+            int remainingFish[Max]; // 当前在每个湖剩余能钓的鱼的数目
 
             for (int i = 0; i < n; i++)
                 remainingFish[i] = fi[i]; // 初始化
@@ -60,9 +62,9 @@ int main(){
             for (int j = 0; j < p; j++)
                 remainingTime -= ti[j]; // 先减去路程,之后假设John可以在lake 0到lake i之间随意位移
 
-            while (remainingTime > 0)   // 直到时间用尽
-            { 
-                int max = INT_MIN;      //五分钟钓的最多鱼数
+            while (remainingTime > 0) // 直到时间用尽
+            {
+                int max = INT_MIN;           // 五分钟钓的最多鱼数
                 int pos = 0;                 // 当前能钓鱼最多的位置
                 for (int j = 0; j <= p; j++) // 每次选出能钓鱼最多的位置
                     if (remainingFish[j] > max)
@@ -73,15 +75,15 @@ int main(){
                 time[pos]++;                   // 对应时间++
                 fishNum += remainingFish[pos]; // 累加钓鱼数
                 remainingFish[pos] = remainingFish[pos] - di[pos] > 0 ? remainingFish[pos] - di[pos] : 0;
-                //更新下一个五分钟的钓鱼数
-                remainingTime--;//减少剩余时间
+                // 更新下一个五分钟的钓鱼数
+                remainingTime--; // 减少剩余时间
             }
-            if (fishNum > bestFishNum)//更新最大钓鱼数
+            if (fishNum > bestFishNum) // 更新最大钓鱼数
             {
                 bestFishNum = fishNum;
                 for (int i = 0; i < n; i++)
                 {
-                    best[i] = time[i];//更新每个湖的时间
+                    best[i] = time[i]; // 更新每个湖的时间
                 }
             }
         }

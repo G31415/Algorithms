@@ -12,14 +12,13 @@
 #include <queue>
 
 using namespace std;
-
 struct Coin
 {
     int value;
     int num;
     Coin() {}
     Coin(int x, int y) : value(x), num(y) {}
-    bool operator<(const Coin &other) const//小于运算符重载，用于排序
+    bool operator<(const Coin &other) const // 小于运算符重载，用于排序
     {
         return value < other.value;
     }
@@ -38,8 +37,8 @@ int main()
 
         int res = 0;
         sort(coin, coin + n);
-        
-        for (int i = n - 1; i >= 0; i++)//从大到小进行选择
+
+        for (int i = n - 1; i >= 0; i++) // 从大到小进行选择
         {
             if (coin[i].value >= c)
             {
@@ -47,7 +46,7 @@ int main()
                 coin[i].num = 0;
             }
             else
-                break;//小于则跳出循环
+                break; // 小于则跳出循环
         }
         while (true)
         {

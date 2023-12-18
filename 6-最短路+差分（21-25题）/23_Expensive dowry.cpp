@@ -11,7 +11,7 @@
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
-    using namespace std;
+using namespace std;
 
 const int maxn = 110;
 const int INF = 200000000;

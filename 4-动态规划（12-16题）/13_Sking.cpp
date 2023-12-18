@@ -35,8 +35,8 @@ int dfs(int x, int y)
         int x1 = x + to[i][0];
         int y1 = y + to[i][1];
         if (check(x1, y1) && high[x1][y1] < high[x][y])
-        { // 判断能否向下滑
-            maxLen[x][y] = max(dfs(x1, y1) + 1, maxLen[x][y]);//递归搜索
+        {                                                      // 判断能否向下滑
+            maxLen[x][y] = max(dfs(x1, y1) + 1, maxLen[x][y]); // 递归搜索
         }
     }
     return maxLen[x][y]; // 返回搜索过的点，并保存在数组中
@@ -50,7 +50,7 @@ int main()
         for (int j = 1; j <= m; j++)
         {
             scanf("%d", &high[i][j]);
-            maxLen[i][j] = 0;//初始化
+            maxLen[i][j] = 0; // 初始化
         }
     }
     for (int i = 1; i <= n; i++)
@@ -60,7 +60,7 @@ int main()
             ans = max(ans, dfs(i, j)); // 搜索每一个点，并且找出最大值
         }
     }
-    printf("%d",ans);
+    printf("%d", ans);
     return 0;
 }
 

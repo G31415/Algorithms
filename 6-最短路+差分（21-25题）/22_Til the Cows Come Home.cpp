@@ -6,9 +6,10 @@
 
 // dijkstra  4100K	125MS
 #include <iostream>
-    using namespace std;
 #define inf 1 << 29
 #define MAXV 1005
+
+using namespace std;
 
 int map[MAXV][MAXV];
 int n, m;
@@ -66,8 +67,7 @@ int main()
     return 0;
 }
 
-
-/* 
+/*
 // bellman-ford  156K  63MS
 #include <iostream>
 using namespace std;
@@ -119,11 +119,10 @@ int main()
         bellman_ford();
     }
     return 0;
-} 
+}
 */
 
-
-/* 
+/*
 // spfa 248K  0MS
 #include <iostream>
 #include <queue>
@@ -196,5 +195,5 @@ int main()
         spfa();
     }
     return 0;
-} 
+}
 */

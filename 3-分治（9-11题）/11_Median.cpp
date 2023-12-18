@@ -33,7 +33,7 @@ bool check(int x)
         --j;
         cnt += j - i;
     }
-    if (!(((n * (n - 1)) >> 1) & 1))//判断奇偶
+    if (!(((n * (n - 1)) >> 1) & 1)) // 判断奇偶
         return cnt < (n * (n - 1)) >> 2;
     else
         return cnt <= (n * (n - 1)) >> 2;
@@ -49,8 +49,8 @@ int main()
         int l = 0, r = a[n];
         while (l < r)
         {
-            int mid = (l + r )>> 1;
-            if (check(mid))//二分中间值数列
+            int mid = (l + r) >> 1;
+            if (check(mid)) // 二分中间值数列
                 l = mid + 1;
             else
                 r = mid;
@@ -59,4 +59,3 @@ int main()
     }
     return 0;
 }
-

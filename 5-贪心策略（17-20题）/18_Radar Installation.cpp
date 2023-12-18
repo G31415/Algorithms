@@ -30,7 +30,6 @@ bool cmp(Node a, Node b)
     return a.right < b.right;
 }
 
-
 int main()
 {
     int i, x, y, sum, num = 1;
@@ -45,8 +44,8 @@ int main()
         {
             scanf("%d %d", &x, &y);
             if (y > d)
-                sum = -1;//超出雷达范围，不成立
-            le = sqrt(pow((float)d, 2) - pow((float)y, 2));//计算左右距离
+                sum = -1;                                   // 超出雷达范围，不成立
+            le = sqrt(pow((float)d, 2) - pow((float)y, 2)); // 计算左右距离
             s[i].left = x - le;
             s[i].right = x + le;
         }
