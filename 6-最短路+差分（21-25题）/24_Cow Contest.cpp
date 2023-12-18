@@ -1,1 +1,1 @@
-// POJ 3660 Cow Contest
+// poj3660 Cow Contest

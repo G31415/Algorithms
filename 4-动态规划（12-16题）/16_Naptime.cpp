@@ -1,5 +1,7 @@
 // poj2228 Naptime
+
 // 这是环形dp的一种，策略是执行两次dp，第一次在任意位置断链成环，按照线性dp求解，第二次则通过赋值和限制条件，算出把断开的位置连上的状态的解，然后比较两次dp的结果
+
 #include <iostream>
 #include <cstdio>
 #include <cstring>
