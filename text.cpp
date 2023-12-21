@@ -33,7 +33,7 @@ int main()
     }
     cout << endl;
     cout << endl;
-    
+
     // 核心代码
     for (int k = 1; k <= n; k++)
     {
@@ -49,8 +49,8 @@ int main()
         {
             for (int j = 1; j <= n; j++)
             {
-                if(e[i][j]/100==999999)
-                printf("INF ");
+                if (e[i][j] / 100 == 999999)
+                    printf("INF ");
                 else
                     printf("%3d ", e[i][j]);
             }
@@ -77,7 +77,7 @@ int main()
 6 3 10
 */
 
-/* 
+/*
 5 9
 1 2 3
 1 3 8
