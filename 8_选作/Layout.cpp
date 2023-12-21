@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <queue>
-        using namespace std;
+using namespace std;
 struct node
 {
     int from;
